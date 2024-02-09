@@ -6,12 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-
 @Builder
 @AllArgsConstructor
-@Getter
 @Setter
-public class AddProductResponse {
+@Getter
+public class UpdateProductResponse {
     private Long productId;
     private String imageUrl;
     private BigDecimal amount;

@@ -1,20 +1,17 @@
-package org.example.dto.response;
+package org.example.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-
-@Builder
-@AllArgsConstructor
 @Getter
 @Setter
-public class AddProductResponse {
-    private Long productId;
+public class UpdateProductRequest {
+    private long productId;
+    private long adminId;
     private String imageUrl;
     private BigDecimal amount;
     private String name;
     public String description;
+
 }

@@ -19,5 +19,5 @@ public class Product {
     private String name;
     public String description;
     @ManyToOne
-    private   User uploader;
+    private   Admin uploader;
 }
