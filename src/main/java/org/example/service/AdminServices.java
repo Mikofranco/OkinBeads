@@ -47,6 +47,7 @@ public class AdminServices  implements AdminService{
     public AddProductResponse addProduct(AddProductRequest request) {
       var admin = adminRepo.findById(request.getAdminId()).orElseThrow(()-> new InvalidUserId("Invalid User Id"));
         Product product=productService.add(request.getAmount(), request.getName(), request.description, request.getImageUrl());
+        System.out.println(product.getUploader()  + "          "+product.getId());
         product.setUploader(admin);
         var savedProduct =productRepo.save(product);
        return AddProductResponse.builder()
@@ -73,26 +74,19 @@ public class AdminServices  implements AdminService{
     public UpdateProductResponse updateProduct(UpdateProductRequest request) {
         var admin = adminRepo.findById(request.getAdminId()).orElseThrow(()-> new InvalidUserId("Invalid User Id"));
         var product = productRepo.findById(request.getProductId()).orElseThrow(()-> new UnableToUpdateProduct("Unable to update product"));
-//
-//        if(!admin.getId().equals(product.getUploader().getId())) {
-//            throw  new InvalidUserId("Invalid user Id");
-//        }
-        if (!request.getName().isEmpty())
-            product.setName(request.getName());
-        if (!request.getDescription().isEmpty())
-            product.setDescription(request.getDescription());
-        if (request.getAmount() != null)
-            product.setAmount(request.getAmount());
-        if (!request.getImageUrl().isEmpty())
-            product.setImageUrl(request.getImageUrl());
-
+        if(!admin.getId().equals(product.getUploader().getId()))
+            throw new UnableToUpdateProduct(" Unable  to update Product");
+        product.setAmount(request.getAmount());
+        product.setDescription(request.getDescription());
+        product.setName(request.getName());
+        product.setImageUrl(request.getImageUrl());
         var updatedProduct =productRepo.save(product);
         return  UpdateProductResponse.builder()
-                .amount(updatedProduct.getAmount())
-                .productId(updatedProduct.getId())
-                .name(updatedProduct.getName())
-                .description(updatedProduct.getDescription())
                 .imageUrl(updatedProduct.getImageUrl())
+                .description(updatedProduct.getDescription())
+                .name(updatedProduct.getName())
+                .amount(updatedProduct.getAmount())
                 .build();
+
     }
 }
