@@ -6,6 +6,7 @@ import org.example.data.repo.ProductRepo;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +32,15 @@ public class ProductServices implements ProductService {
     public Product updateDescription(Long id) {
         var product =productRepo.findById(id).orElseThrow(()-> new RuntimeException("Item not found"));
         return null;
+    }
+
+    @Override
+    public List<Product> getProducts() {
+        return  productRepo.findAll();
+    }
+
+    @Override
+    public Product getSingleProduct(long productId) {
+        return productRepo.findById(productId).orElseThrow(()-> new RuntimeException("Product not found"));
     }
 }

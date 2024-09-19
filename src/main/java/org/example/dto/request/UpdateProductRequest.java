@@ -1,18 +1,16 @@
 package org.example.dto.request;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.data.models.Category;
 
-import java.math.BigDecimal;
-@Getter
-@Setter
-public class AddProductRequest {
-    private Long adminId;
-    private String imageUrl;
-    private BigDecimal amount;
+ @Setter @Getter
+public class UpdateProductRequest {
+    private long productId;
     private String name;
+    private Double amount;
     private String description;
+    private String imageUrl;
     private Category category;
-
 }
