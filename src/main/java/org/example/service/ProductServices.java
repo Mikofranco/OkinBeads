@@ -43,4 +43,5 @@ public class ProductServices implements ProductService {
     public Product getSingleProduct(long productId) {
         return productRepo.findById(productId).orElseThrow(()-> new RuntimeException("Product not found"));
     }
+
 }

@@ -5,10 +5,7 @@ import org.example.data.models.User;
 import org.example.data.repo.AdminRepo;
 import org.example.data.repo.ProductRepo;
 import org.example.data.repo.UserRepo;
-import org.example.dto.request.AddProductRequest;
-import org.example.dto.request.AdminLoginRequest;
-import org.example.dto.request.RegisterAdminRequest;
-import org.example.dto.request.UpdateProductRequest;
+import org.example.dto.request.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -57,7 +54,7 @@ class AdminServicesTest {
         productRequest.setCategory(Category.BAG);
         productRequest.setDescription("A necklace  made with cowries for the use of customers with touch of perfection");
         adminService.addProduct(productRequest);
-        assertThat(productRepo.count(), is(3L));
+        assertThat(productRepo.count(), is(5L));
     }
 
     @Test
@@ -68,5 +65,14 @@ class AdminServicesTest {
         var product = adminService.updateProduct(request);
         assertThat(product.getCategory(), is(Category.BAG));
     }
+
+    @Test
+    public void testToDeleteProduct(){
+        DeleteProductRequest request =new DeleteProductRequest();
+        request.setProductId(2L);
+        adminService.deleteProduct(request);
+        assertThat(productRepo.count(),is(4L));
+    }
+
 
 }

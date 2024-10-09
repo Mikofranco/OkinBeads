@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Setter
@@ -19,7 +20,11 @@ public class Product {
     private String name;
     public String description;
     @ManyToOne
-    private   Admin uploader;
+    private Admin uploader;
     @Enumerated(EnumType.STRING)
     private Category category;
+    @OneToMany
+    private List<Comment> comments;
+    @OneToMany
+    private List<Likes> likes;
 }

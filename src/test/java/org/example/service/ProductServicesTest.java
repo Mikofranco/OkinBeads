@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 
 class ProductServicesTest {
@@ -30,6 +31,13 @@ class ProductServicesTest {
         productService.add(BigDecimal.valueOf(4000), "Gold bag", "made for more and class", "http://somthing.url");
         productService.add(BigDecimal.valueOf(9000), "bead hat", "made for more and elegant okinGlobal", "http://somthing.url");
         assertThat(productRepo.count(),is(3L));
+    }
+
+    @Test
+    public void testToGetMultiProduct(){
+       List<Product> products =productService.getProducts();
+       products.forEach(System.out::println);
+        assertThat(products.size(),is(4));
     }
 
 }
