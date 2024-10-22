@@ -11,5 +11,4 @@ public interface ProductService {
     Product updateDescription(Long id);
     List<Product> getProducts();
     Product getSingleProduct(long productId);
-
 }

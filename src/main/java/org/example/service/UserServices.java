@@ -13,6 +13,7 @@ import org.example.dto.request.RegisterUserRequest;
 import org.example.dto.response.CommentResponse;
 import org.example.dto.response.LikeResponse;
 import org.example.dto.response.LoginUserResponse;
+import org.example.dto.response.RegisterUserResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,13 +25,20 @@ public class UserServices  implements UserService{
     private final CommentRepo commentRepo;
 
     @Override
-    public void register(RegisterUserRequest request) {
+    public RegisterUserResponse register(RegisterUserRequest request) {
         User user = new User();
         user.setRole(Role.User);
         user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
-        userRepo.save(user);
+        var newUser =userRepo.save(user);
+        if(newUser != null){
+            return RegisterUserResponse.builder()
+                    .message("Registration successful")
+                    .username(newUser.getUsername())
+                    .build();
+        }
+        throw new RuntimeException("Reistration failed");
     }
 
     @Override
