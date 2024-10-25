@@ -57,6 +57,7 @@ public class UserServices  implements UserService{
 
     @Override
     public LikeResponse likeProduct(LikeRequest request) {
+        System.out.println("request user id   " + request.getUserId());
        var user = getUser(request);
        var product = getProduct(request);
        Likes like = new Likes();

@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.data.models.User;
 import org.example.data.repo.UserRepo;
 import org.example.dto.request.CommentRequest;
 import org.example.dto.request.LikeRequest;
@@ -102,6 +103,12 @@ class UserServicesTest {
         request.setProductId(1);
         request.setComment("This product is amazing thanks i will love to get more or this ");
         assertThrows(RuntimeException.class,()->{userService.commentOnProduct(request);} );
+    }
+
+    @Test
+    public void getUsers(){
+        User user =userRepo.findById(1L).orElseThrow();
+        assertThat(user.getUsername(), is("mikijoe"));
     }
 
 }
