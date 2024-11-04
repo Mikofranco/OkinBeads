@@ -24,7 +24,7 @@ public class CartServiceImpl implements CartService{
         var product = productRepo.findById(productId).orElseThrow(() -> new RuntimeException("Product not found"));
 
         // Check if the user already has a cart
-        Cart cart = cartRepo.findByUserId(userId).orElseGet(() -> {
+        Cart cart = cartRepo.findByUserIdWithProducts(userId).orElseGet(() -> {
             // If no cart exists, create a new one
             Cart newCart = new Cart();
             newCart.setUser(user);

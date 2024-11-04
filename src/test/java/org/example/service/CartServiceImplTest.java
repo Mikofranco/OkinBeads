@@ -16,7 +16,7 @@ class CartServiceImplTest {
 
     @Test
     public void testAddToCart(){
-        cartService.addToCart(5L,1L);
+        cartService.addToCart(3L,1L);
         assertEquals(1L, cartRepo.count());
     }
 
